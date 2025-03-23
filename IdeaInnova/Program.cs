@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddSession(); // Add session support
 // Enable Swagger for API documentation
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -33,15 +33,20 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+app.UseSession(); // Enable session
 app.UseAuthorization();
 
-// Enable API Controllers for RESTful endpoints
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllers(); // Enables API routes
-    endpoints.MapControllerRoute(
-        name: "default",
-        pattern: "{controller=Home}/{action=Index}/{id?}");
-});
+//// Enable API Controllers for RESTful endpoints
+//app.UseEndpoints(endpoints =>
+//{
+//    endpoints.MapControllers(); // Enables API routes
+//    endpoints.MapControllerRoute(
+//        name: "default",
+//        pattern: "{controller=Home}/{action=Index}/{id?}");
+//});
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Account}/{action=Login}/{id?}");
 
 app.Run();
+

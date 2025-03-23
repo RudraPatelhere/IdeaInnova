@@ -1,8 +1,31 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
+    var allIdeas = ViewBag.AllIdeas as List<IdeaInnova.Models.Idea>;
+    var trending = ViewBag.Trending as List<IdeaInnova.Models.Idea>;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="p-6">
+    <h2 class="text-2xl font-bold mb-4 text-purple-700">🔥 Trending Ideas</h2>
+    <div class="grid md:grid-cols-3 gap-4 mb-10">
+        @foreach (var idea in trending)
+        {
+            <div class="bg-white p-5 rounded-lg shadow-lg hover:shadow-2xl transition duration-300">
+                <h3 class="text-xl font-bold text-purple-700">@idea.Title</h3>
+                <p class="text-sm mt-2 text-gray-700">@idea.Description</p>
+                <p class="text-xs text-gray-500 mt-2">Votes: @idea.Votes</p>
+            </div>
+        }
+    </div>
+
+    <h2 class="text-2xl font-bold mb-4 text-blue-700">💡 All Ideas</h2>
+    <div class="grid md:grid-cols-2 gap-4">
+        @foreach (var idea in allIdeas)
+        {
+            <div class="bg-white p-5 rounded-lg shadow hover:shadow-xl transition duration-300">
+                <h3 class="font-semibold text-lg text-blue-700">@idea.Title</h3>
+                <p class="text-sm text-gray-700">@idea.Description</p>
+                <p class="text-xs text-gray-500 mt-1">Votes: @idea.Votes | Submitted: @idea.SubmissionDate.ToShortDateString()</p>
+            </div>
+        }
+    </div>
 </div>

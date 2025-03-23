@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Signup";
+}
+
+<div class="max-w-md mx-auto mt-10 p-6 bg-white shadow rounded">
+    <h2 class="text-xl font-bold mb-4">Create an Account</h2>
+    <form asp-action="Signup" method="post">
+        <input type="text" name="username" placeholder="Username" class="form-control mb-2 w-full p-2 border rounded" required />
+        <input type="password" name="password" placeholder="Password" class="form-control mb-2 w-full p-2 border rounded" required />
+        <select name="role" class="form-control mb-2 w-full p-2 border rounded">
+            <option>User</option>
+            <option>Admin</option>
+        </select>
+        <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded">Sign Up</button>
+    </form>
+    @if (ViewBag.Error != null)
+    {
+        <p class="text-red-500 mt-3">@ViewBag.Error</p>
+    }
+</div>
