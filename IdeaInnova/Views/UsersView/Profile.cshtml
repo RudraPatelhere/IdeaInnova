@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "My Profile";
+    var user = ViewBag.User;
+    var ideas = ViewBag.Ideas as List<IdeaInnova.Models.Idea>;
+}
+
+<div class="p-6">
+    <h2 class="text-3xl font-bold text-purple-600 mb-4">👤 Welcome, @user.Username</h2>
+    <h3 class="text-xl font-semibold mb-2 text-blue-600">Your Submitted Ideas</h3>
+    <div class="grid md:grid-cols-2 gap-4">
+        @foreach (var idea in ideas)
+        {
+            <div class="bg-white p-4 shadow-md rounded-lg hover:shadow-xl transition">
+                <h4 class="font-bold text-lg text-purple-700">@idea.Title</h4>
+                <p class="text-sm text-gray-700">@idea.Description</p>
+                <p class="text-xs text-gray-500 mt-2">Votes: @idea.Votes | Submitted: @idea.SubmissionDate.ToShortDateString()</p>
+            </div>
+        }
+    </div>
+</div>

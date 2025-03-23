@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login | IdeaInnova</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gradient-to-br from-purple-100 to-blue-100">
+  <div class="bg-white p-8 rounded-xl shadow-md w-full max-w-sm">
+    <h1 class="text-xl font-bold text-purple-600 mb-6 text-center">💡 IdeaInnova Login</h1>
+    <form id="loginForm">
+      <input type="text" id="username" placeholder="Username" class="w-full p-2 border rounded mb-4" required />
+      <input type="password" id="password" placeholder="Password" class="w-full p-2 border rounded mb-4" required />
+      <button type="submit" class="w-full py-2 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded font-semibold">Login</button>
+    </form>
+    <p class="text-sm text-center mt-4">Don't have an account? <a href="signup.html" class="text-purple-500">Sign up</a></p>
+    <p id="errorMsg" class="text-red-500 mt-3 text-sm text-center hidden">Invalid credentials.</p>
+  </div>
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+      const res = await fetch("/api/users/login", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({username, password})
+      });
+      if (res.ok) {
+        localStorage.setItem("user", username);
+        window.location.href = "index.html";
+      } else {
+        document.getElementById("errorMsg").classList.remove("hidden");
+      }
+    });
+  </script>
+</body>
+</html>

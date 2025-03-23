@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sign Up | IdeaInnova</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-100 to-purple-100">
+  <div class="bg-white p-8 rounded-xl shadow-md w-full max-w-sm">
+    <h1 class="text-xl font-bold text-blue-600 mb-6 text-center">💡 Create Account</h1>
+    <form id="signupForm">
+      <input type="text" id="newUsername" placeholder="Username" class="w-full p-2 border rounded mb-4" required />
+      <input type="password" id="newPassword" placeholder="Password" class="w-full p-2 border rounded mb-4" required />
+      <button type="submit" class="w-full py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded font-semibold">Sign Up</button>
+    </form>
+    <p id="signupMsg" class="text-green-600 mt-4 text-sm text-center hidden">Signup successful. Redirecting to login...</p>
+  </div>
+  <script>
+    document.getElementById("signupForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const username = document.getElementById("newUsername").value;
+      const password = document.getElementById("newPassword").value;
+      const res = await fetch("/api/users/signup", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({username, password})
+      });
+      if (res.ok) {
+        document.getElementById("signupMsg").classList.remove("hidden");
+        setTimeout(() => window.location.href = "login.html", 1500);
+      } else {
+        alert("Signup failed. User may already exist.");
+      }
+    });
+  </script>
+</body>
+</html>

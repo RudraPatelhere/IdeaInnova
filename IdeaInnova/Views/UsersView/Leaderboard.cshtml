@@ -1,0 +1,30 @@
+﻿@{
+    ViewData["Title"] = "Leaderboard";
+    var leaderboard = ViewBag.Leaderboard;
+}
+
+<div class="p-6">
+    <h2 class="text-3xl font-bold mb-6 text-pink-700">🏆 Top Contributors</h2>
+    <table class="w-full text-sm text-left bg-white rounded-lg shadow overflow-hidden">
+        <thead class="bg-gradient-to-r from-pink-500 to-purple-500 text-white">
+            <tr>
+                <th class="p-3">#</th>
+                <th class="p-3">Username</th>
+                <th class="p-3">Ideas</th>
+                <th class="p-3">Votes</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < leaderboard.Count; i++)
+            {
+                var user = leaderboard[i];
+                <tr class="hover:bg-pink-50 transition">
+                    <td class="p-3">@((i + 1).ToString())</td>
+                    <td class="p-3">@user.Username</td>
+                    <td class="p-3">@user.IdeaCount</td>
+                    <td class="p-3">@user.TotalVotes</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

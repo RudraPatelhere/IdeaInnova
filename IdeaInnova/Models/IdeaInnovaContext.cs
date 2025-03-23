@@ -7,5 +7,6 @@ namespace IdeaInnova.Models
         public IdeaInnovaContext(DbContextOptions<IdeaInnovaContext> options) : base(options) { }
 
         public DbSet<Idea> Ideas { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }
