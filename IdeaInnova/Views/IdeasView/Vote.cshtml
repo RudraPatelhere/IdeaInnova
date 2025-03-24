@@ -1,20 +1,72 @@
-﻿@model IEnumerable<IdeaInnova.Models.Idea>
+﻿@* @model IEnumerable<IdeaInnova.Models.Idea> *@
+@* @{ *@
+@*     ViewData["Title"] = "Vote"; *@
+@* } *@
+
+@* <div class="p-6"> *@
+@*     <h2 class="text-2xl font-bold mb-6 text-blue-700">👍 Vote on Ideas</h2> *@
+@*     <div class="grid md:grid-cols-2 gap-6"> *@
+@*         @foreach (var idea in Model) *@
+@*         { *@
+@*             <div class="bg-white p-5 rounded-lg shadow hover:shadow-xl transition duration-300"> *@
+@*                 <h3 class="text-lg font-semibold text-purple-700">@idea.Title</h3> *@
+@*                 <p class="text-sm text-gray-700">@idea.Description</p> *@
+@*                 <form asp-action="Upvote" asp-route-id="@idea.Id" method="post"> *@
+@*                     <button type="submit" class="mt-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white px-4 py-2 rounded shadow hover:scale-105 transition">Upvote</button> *@
+@*                 </form> *@
+@*                 <p class="text-xs text-gray-500 mt-2">Votes: @idea.Votes</p> *@
+@*             </div> *@
+@*         } *@
+@*     </div> *@
+@* </div> *@
+
+
+@model IEnumerable<IdeaInnova.Models.Idea>
 @{
     ViewData["Title"] = "Vote";
 }
 
 <div class="p-6">
-    <h2 class="text-2xl font-bold mb-6 text-blue-700">👍 Vote on Ideas</h2>
+    <h2 class="text-2xl font-bold mb-4 text-gray-800">Vote on Ideas</h2>
+    <p class="text-sm text-gray-600 mb-4">Support great ideas from your colleagues</p>
+
+    <!-- Tabs -->
+    <div class="mb-6 flex space-x-3">
+        <button class="px-4 py-1 rounded-full bg-purple-600 text-white text-sm font-semibold">All Ideas</button>
+        <button class="px-4 py-1 rounded-full bg-gray-100 hover:bg-gray-200 text-sm">Most Voted</button>
+        <button class="px-4 py-1 rounded-full bg-gray-100 hover:bg-gray-200 text-sm">Recent</button>
+        <button class="px-4 py-1 rounded-full bg-gray-100 hover:bg-gray-200 text-sm">My Department</button>
+    </div>
+
+    <!-- Featured Top Idea -->
+    <div class="bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-xl p-6 mb-8 shadow-lg relative">
+        <span class="absolute top-2 right-2 text-xs bg-white text-purple-600 font-semibold px-3 py-1 rounded-full">Top Idea</span>
+        <h3 class="text-lg font-bold">Implement AI-Powered Customer Service Chatbot</h3>
+        <p class="text-sm my-2">Automate customer support with an AI chatbot to handle basic inquiries and reduce response time.</p>
+        <div class="flex justify-between items-center text-sm mt-2">
+            <span>Sarah Chen • Customer Service</span>
+            <span class="text-white font-bold text-xl">245 votes</span>
+        </div>
+    </div>
+
+    <!-- Idea Cards -->
     <div class="grid md:grid-cols-2 gap-6">
         @foreach (var idea in Model)
         {
-            <div class="bg-white p-5 rounded-lg shadow hover:shadow-xl transition duration-300">
-                <h3 class="text-lg font-semibold text-purple-700">@idea.Title</h3>
-                <p class="text-sm text-gray-700">@idea.Description</p>
-                <form asp-action="Upvote" asp-route-id="@idea.Id" method="post">
-                    <button type="submit" class="mt-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white px-4 py-2 rounded shadow hover:scale-105 transition">Upvote</button>
+            <div class="bg-white rounded-lg p-5 shadow hover:shadow-md transition">
+                <div class="flex justify-between items-start mb-1">
+                    <div>
+                        <h4 class="text-md font-semibold text-gray-800">@idea.Title</h4>
+                        <p class="text-xs text-gray-500">By @idea.User?.Username</p>
+                    </div>
+                    <span class="text-xs bg-green-100 text-green-600 px-2 py-0.5 rounded-full">New</span>
+                </div>
+                <p class="text-sm text-gray-600 mt-1">@idea.Description</p>
+
+                <form asp-action="Upvote" asp-route-id="@idea.Id" method="post" class="mt-4 flex justify-between items-center">
+                    <button type="submit" class="text-sm px-4 py-1 rounded bg-blue-500 hover:bg-blue-600 text-white transition shadow-sm">👍 Vote</button>
+                    <span class="text-xs text-gray-500">@idea.Votes votes</span>
                 </form>
-                <p class="text-xs text-gray-500 mt-2">Votes: @idea.Votes</p>
             </div>
         }
     </div>

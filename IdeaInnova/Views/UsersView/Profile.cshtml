@@ -1,20 +1,83 @@
-﻿@{
+﻿@* @{ *@
+@*     ViewData["Title"] = "My Profile"; *@
+@*     var user = ViewBag.User; *@
+@*     var ideas = ViewBag.Ideas as List<IdeaInnova.Models.Idea>; *@
+@* } *@
+
+@* <div class="p-6"> *@
+@*     <h2 class="text-3xl font-bold text-purple-600 mb-4">👤 Welcome, @user.Username</h2> *@
+@*     <h3 class="text-xl font-semibold mb-2 text-blue-600">Your Submitted Ideas</h3> *@
+@*     <div class="grid md:grid-cols-2 gap-4"> *@
+@*         @foreach (var idea in ideas) *@
+@*         { *@
+@*             <div class="bg-white p-4 shadow-md rounded-lg hover:shadow-xl transition"> *@
+@*                 <h4 class="font-bold text-lg text-purple-700">@idea.Title</h4> *@
+@*                 <p class="text-sm text-gray-700">@idea.Description</p> *@
+@*                 <p class="text-xs text-gray-500 mt-2">Votes: @idea.Votes | Submitted: @idea.SubmissionDate.ToShortDateString()</p> *@
+@*             </div> *@
+@*         } *@
+@*     </div> *@
+@* </div> *@
+
+
+@{
     ViewData["Title"] = "My Profile";
     var user = ViewBag.User;
     var ideas = ViewBag.Ideas as List<IdeaInnova.Models.Idea>;
 }
 
-<div class="p-6">
-    <h2 class="text-3xl font-bold text-purple-600 mb-4">👤 Welcome, @user.Username</h2>
-    <h3 class="text-xl font-semibold mb-2 text-blue-600">Your Submitted Ideas</h3>
-    <div class="grid md:grid-cols-2 gap-4">
-        @foreach (var idea in ideas)
-        {
-            <div class="bg-white p-4 shadow-md rounded-lg hover:shadow-xl transition">
-                <h4 class="font-bold text-lg text-purple-700">@idea.Title</h4>
-                <p class="text-sm text-gray-700">@idea.Description</p>
-                <p class="text-xs text-gray-500 mt-2">Votes: @idea.Votes | Submitted: @idea.SubmissionDate.ToShortDateString()</p>
+<div class="grid md:grid-cols-3 gap-6 p-6">
+    <!-- Left: Profile + Points -->
+    <div class="bg-white p-6 rounded-lg shadow-md">
+        <div class="text-center">
+            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="user" class="w-20 h-20 rounded-full mx-auto mb-2 shadow" />
+            <h4 class="text-lg font-bold text-gray-800">@user.Username</h4>
+            <p class="text-sm text-gray-500">Innovation Champion</p>
+        </div>
+
+        <!-- Points -->
+        <div class="mt-6">
+            <h5 class="text-sm font-semibold text-gray-600 mb-1">Your Points</h5>
+            <div class="bg-purple-100 rounded-full h-2 mb-1 overflow-hidden">
+                <div class="bg-purple-600 h-full w-[75%]"></div>
             </div>
-        }
+            <div class="flex justify-between text-xs text-gray-500">
+                <span>2,450</span>
+                <span>75% to next level</span>
+            </div>
+        </div>
+
+        <!-- Achievements -->
+        <div class="mt-6">
+            <h5 class="text-sm font-semibold text-gray-600 mb-2">Your Achievements</h5>
+            <ul class="text-sm space-y-2 text-gray-700">
+                <li>⭐ Top Innovator</li>
+                <li>✅ 5 Ideas Approved</li>
+                <li>👍 50+ Votes Received</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Right: Submitted Ideas -->
+    <div class="col-span-2 bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-xl font-bold text-gray-800 mb-4">Your Submitted Ideas</h2>
+
+        <div class="grid md:grid-cols-2 gap-4">
+            @if (ideas.Count == 0)
+            {
+                <p class="text-gray-500">You haven’t submitted any ideas yet.</p>
+            }
+            else
+            {
+                @foreach (var idea in ideas)
+                {
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 hover:shadow transition">
+                        <h4 class="font-semibold text-purple-700">@idea.Title</h4>
+                        <p class="text-sm text-gray-600 mt-1">@idea.Description</p>
+                        <p class="text-xs text-gray-500 mt-2">Votes: <strong>@idea.Votes</strong> • @idea.SubmissionDate.ToShortDateString()</p>
+                    </div>
+                }
+            }
+        </div>
     </div>
 </div>

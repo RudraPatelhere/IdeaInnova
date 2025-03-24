@@ -1,13 +1,84 @@
-﻿@model IdeaInnova.Models.Idea
+﻿@* @model IdeaInnova.Models.Idea *@
+@* @{ *@
+@*     ViewData["Title"] = "Submit Idea"; *@
+@* } *@
+
+@* <div class="max-w-xl mx-auto mt-10 bg-white p-6 rounded shadow-lg"> *@
+@*     <h2 class="text-2xl font-bold mb-4 text-purple-700">Submit Your Brilliant Idea ✨</h2> *@
+@*     <form asp-action="Submit" method="post"> *@
+@*         <input asp-for="Title" class="w-full mb-3 p-2 border border-purple-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-400" placeholder="Idea Title" required /> *@
+@*         <textarea asp-for="Description" class="w-full mb-3 p-2 border border-purple-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-400" placeholder="Description" rows="4" required></textarea> *@
+@*         <button type="submit" class="bg-gradient-to-r from-purple-500 to-pink-500 text-white py-2 px-4 rounded shadow hover:scale-105 transition">Submit</button> *@
+@*     </form> *@
+@* </div> *@
+
+
+
+@model IdeaInnova.Models.Idea
 @{
     ViewData["Title"] = "Submit Idea";
 }
 
-<div class="max-w-xl mx-auto mt-10 bg-white p-6 rounded shadow-lg">
-    <h2 class="text-2xl font-bold mb-4 text-purple-700">Submit Your Brilliant Idea ✨</h2>
-    <form asp-action="Submit" method="post">
-        <input asp-for="Title" class="w-full mb-3 p-2 border border-purple-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-400" placeholder="Idea Title" required />
-        <textarea asp-for="Description" class="w-full mb-3 p-2 border border-purple-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-400" placeholder="Description" rows="4" required></textarea>
-        <button type="submit" class="bg-gradient-to-r from-purple-500 to-pink-500 text-white py-2 px-4 rounded shadow hover:scale-105 transition">Submit</button>
-    </form>
+<div class="grid md:grid-cols-3 gap-6 p-6">
+    <!-- Form Section -->
+    <div class="col-span-2 bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-2xl font-bold mb-4 text-gray-800">Submit Your Innovative Idea</h2>
+
+        <form asp-action="Submit" method="post">
+            <!-- Title -->
+            <label class="text-sm font-medium text-gray-700 block mb-1">Subject</label>
+            <input asp-for="Title" placeholder="Enter a catchy title for your idea"
+                   class="w-full mb-4 p-2 border border-gray-300 rounded focus:ring-2 focus:ring-purple-400 focus:outline-none" />
+
+            <!-- Priority -->
+            <label class="text-sm font-medium text-gray-700 block mb-1">Priority Level</label>
+            <div class="mb-4 space-x-4 text-sm">
+                <label><input type="radio" name="priority" value="low" class="mr-1"> Low</label>
+                <label><input type="radio" name="priority" value="medium" class="mr-1"> Medium</label>
+                <label><input type="radio" name="priority" value="high" class="mr-1"> High</label>
+            </div>
+
+            <!-- Description -->
+            <label class="text-sm font-medium text-gray-700 block mb-1">Description</label>
+            <textarea asp-for="Description" rows="5" placeholder="Describe your idea in detail..."
+                      class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-purple-400 focus:outline-none mb-6"></textarea>
+
+            <!-- Submit Button -->
+            <button type="submit"
+                    class="w-full bg-gradient-to-r from-purple-500 to-blue-500 text-white py-2 rounded-lg font-semibold shadow hover:scale-105 transition">
+                Submit Idea
+            </button>
+        </form>
+    </div>
+
+    <!-- Profile + Achievements -->
+    <div class="bg-white p-5 rounded-lg shadow-md">
+        <div class="text-center">
+            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="user" class="w-16 h-16 rounded-full mx-auto mb-2" />
+            <h4 class="text-lg font-bold text-gray-800">Sarah Johnson</h4>
+            <p class="text-sm text-gray-500">Innovation Champion</p>
+        </div>
+
+        <!-- Points -->
+        <div class="mt-6">
+            <h5 class="text-sm font-semibold text-gray-600 mb-1">Your Points</h5>
+            <div class="bg-purple-100 rounded-full h-2 mb-1 overflow-hidden">
+                <div class="bg-purple-600 h-full w-[75%]"></div>
+            </div>
+            <div class="flex justify-between text-xs text-gray-500">
+                <span>2,450</span>
+                <span>75% to next level</span>
+            </div>
+        </div>
+
+        <!-- Achievements -->
+        <div class="mt-6">
+            <h5 class="text-sm font-semibold text-gray-600 mb-2">Your Achievements</h5>
+            <ul class="text-sm space-y-1 text-gray-700">
+                <li>⭐ Top Innovator</li>
+                <li>🎯 5 Ideas Approved</li>
+                <li>👍 50+ Votes Received</li>
+            </ul>
+        </div>
+    </div>
 </div>
