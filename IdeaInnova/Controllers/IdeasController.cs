@@ -1,92 +1,4 @@
-﻿//using IdeaInnova.Models;
-//using Microsoft.AspNetCore.Mvc;
-//using Microsoft.EntityFrameworkCore;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Threading.Tasks;
-
-//namespace IdeaInnova.Controllers
-//{
-//    [Route("api/[controller]")]
-//    [ApiController]
-//    public class IdeasController : ControllerBase
-//    {
-//        private readonly IdeaInnovaContext _context;
-
-//        public IdeasController(IdeaInnovaContext context)
-//        {
-//            _context = context;
-//        }
-
-//        // ✅ GET: api/ideas - Retrieve all ideas
-//        [HttpGet]
-//        public async Task<ActionResult<IEnumerable<Idea>>> GetIdeas()
-//        {
-//            return await _context.Ideas.ToListAsync();
-//        }
-
-//        // ✅ POST: api/ideas - Submit a new idea
-//        [HttpPost]
-//        public async Task<ActionResult<Idea>> SubmitIdea([FromBody] Idea idea)
-//        {
-//            if (idea == null || string.IsNullOrEmpty(idea.Title) || string.IsNullOrEmpty(idea.Description))
-//            {
-//                return BadRequest("Invalid idea data.");
-//            }
-
-//            _context.Ideas.Add(idea);
-//            await _context.SaveChangesAsync();
-
-//            return CreatedAtAction(nameof(GetIdeas), new { id = idea.Id }, idea);
-//        }
-
-//        // ✅ PATCH: api/ideas/{id} - Upvote an idea
-//        [HttpPatch("{id}")]
-//        public async Task<IActionResult> UpvoteIdea(int id)
-//        {
-//            var idea = await _context.Ideas.FindAsync(id);
-//            if (idea == null)
-//            {
-//                return NotFound();
-//            }
-
-//            idea.Votes += 1; // Increment vote count
-
-//            await _context.SaveChangesAsync();
-//            return NoContent();
-//        }
-
-//        // ✅ DELETE: api/ideas/{id} - Delete an idea
-//        [HttpDelete("{id}")]
-//        public async Task<IActionResult> DeleteIdea(int id)
-//        {
-//            var idea = await _context.Ideas.FindAsync(id);
-//            if (idea == null)
-//            {
-//                return NotFound();
-//            }
-
-//            _context.Ideas.Remove(idea);
-//            await _context.SaveChangesAsync();
-//            return NoContent();
-//        }
-
-
-
-
-
-
-//    }
-//}
-
-
-
-
-
-
-
-
-
+﻿
 using IdeaInnova.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -94,8 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace IdeaInnova.Controllers
-{
+namespace IdeaInnova.Controllers { 
+// It defines the route as "api/ideas" and marks this as an API controller
     [Route("api/[controller]")]
     [ApiController]
     public class IdeasController : ControllerBase
@@ -107,7 +19,7 @@ namespace IdeaInnova.Controllers
             _context = context;
         }
 
-        // ✅ GET: api/ideas - Retrieve all ideas
+        // GET: api/ideas 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Idea>>> GetIdeas()
         {
@@ -117,7 +29,7 @@ namespace IdeaInnova.Controllers
             return await _context.Ideas.Include(i => i.User).ToListAsync();
         }
 
-        // ✅ POST: api/ideas - Submit a new idea
+        // POST: api/ideas 
         [HttpPost]
         public async Task<ActionResult<Idea>> SubmitIdea([FromBody] Idea idea)
         {
@@ -135,7 +47,7 @@ namespace IdeaInnova.Controllers
             return CreatedAtAction(nameof(GetIdeas), new { id = idea.Id }, idea);
         }
 
-        // ✅ PATCH: api/ideas/{id} - Upvote an idea
+        //  PATCH: api/ideas/{id}
         [HttpPatch("{id}")]
         public async Task<IActionResult> UpvoteIdea(int id)
         {
@@ -150,7 +62,7 @@ namespace IdeaInnova.Controllers
             return NoContent();
         }
 
-        // ✅ DELETE: api/ideas/{id}
+        //DELETE: api/ideas/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteIdea(int id)
         {
@@ -165,7 +77,7 @@ namespace IdeaInnova.Controllers
             return NoContent();
         }
 
-        // 🆕 GET: api/ideas/trending - Top 3 ideas by vote
+        //GET: api/ideas/trending 
         [HttpGet("trending")]
         public async Task<ActionResult<IEnumerable<Idea>>> GetTrendingIdeas()
         {
@@ -177,7 +89,7 @@ namespace IdeaInnova.Controllers
             return trending;
         }
 
-        // 🆕 GET: api/ideas/leaderboard - User leaderboard stats
+        // GET: api/ideas/leaderboard
         [HttpGet("leaderboard")]
         public async Task<ActionResult<IEnumerable<object>>> GetLeaderboard()
         {
@@ -197,7 +109,7 @@ namespace IdeaInnova.Controllers
             return Ok(leaderboard);
         }
 
-        // 🆕 GET: api/ideas/user/{userId} - Get all ideas by a specific user
+        //GET: api/ideas/user/{userId}
         [HttpGet("user/{userId}")]
         public async Task<ActionResult<IEnumerable<Idea>>> GetIdeasByUser(int userId)
         {
@@ -210,4 +122,3 @@ namespace IdeaInnova.Controllers
         }
     }
 }
-

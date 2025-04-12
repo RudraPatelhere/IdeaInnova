@@ -40,12 +40,15 @@
 
             <!-- Description -->
             <label class="text-sm font-medium text-gray-700 block mb-1">Description</label>
-            <textarea asp-for="Description" rows="5" placeholder="Describe your idea in detail..."
-                      class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-purple-400 focus:outline-none mb-6"></textarea>
+            <textarea asp-for="Description"
+                      rows="5"
+                      placeholder="Describe your idea in detail..."
+                      class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-purple-400 focus:outline-none mb-6"
+                      required></textarea>
+            <span asp-validation-for="Description" class="text-red-600"></span>
 
             <!-- Submit Button -->
-            <button type="submit"
-                    class="w-full bg-gradient-to-r from-purple-500 to-blue-500 text-white py-2 rounded-lg font-semibold shadow hover:scale-105 transition">
+            <button type="submit" class="w-full bg-gradient-to-r from-purple-500 to-blue-500 text-white py-2 rounded-lg font-semibold shadow hover:scale-105 transition">
                 Submit Idea
             </button>
         </form>
@@ -54,8 +57,17 @@
     <!-- Profile + Achievements -->
     <div class="bg-white p-5 rounded-lg shadow-md">
         <div class="text-center">
-            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="user" class="w-16 h-16 rounded-full mx-auto mb-2" />
-            <h4 class="text-lg font-bold text-gray-800">Sarah Johnson</h4>
+            @{
+                // Retrieve the user from ViewBag (assuming you set ViewBag.User in the controller)
+                var userObj = ViewBag.User as IdeaInnova.Models.User;
+                // Fallback if userObj is null
+                string username = userObj?.Username ?? "Guest";
+
+                // Use the helper to get the correct image URL
+                string profileUrl = ProfileImageHelper.GetProfileImageUrl(username);
+            }
+            <img src="@profileUrl" alt="user" class="w-16 h-16 rounded-full mx-auto mb-2 shadow" />
+            <h4 class="text-lg font-bold text-gray-800">@username</h4>
             <p class="text-sm text-gray-500">Innovation Champion</p>
         </div>
 

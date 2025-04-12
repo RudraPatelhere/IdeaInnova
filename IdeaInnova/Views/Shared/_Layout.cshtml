@@ -1,41 +1,4 @@
-﻿@* <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>@ViewData["Title"] - IdeaInnova</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-</head>
-<body class="bg-gradient-to-tr from-purple-100 via-pink-100 to-blue-100 min-h-screen text-gray-800 font-sans">
-    <nav class="bg-white shadow-md px-6 py-4 flex justify-between items-center">
-        <div class="text-xl font-bold text-purple-600">
-            💡 IdeaInnova
-        </div>
-        <div class="space-x-4 text-sm">
-            <a href="/" class="hover:text-purple-600">Home</a>
-            <a href="/IdeasView/Submit" class="hover:text-purple-600">Submit</a>
-            <a href="/IdeasView/Vote" class="hover:text-purple-600">Vote</a>
-            <a href="/UsersView/Leaderboard" class="hover:text-purple-600">Leaderboard</a>
-            <a href="/UsersView/Profile" class="hover:text-purple-600">Profile</a>
-            @if (Context.Session.GetString("Username") != null)
-            {
-                <span class="text-gray-500">Hi, @Context.Session.GetString("Username")</span>
-                <a href="/Account/Logout" class="text-red-500 ml-2">Logout</a>
-            }
-            else
-            {
-                <a href="/Account/Login" class="text-blue-500">Login</a>
-            }
-        </div>
-    </nav>
-
-    <main class="max-w-6xl mx-auto py-6 px-4">
-        @RenderBody()
-    </main>
-</body>
-</html> *@
-
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">

@@ -15,7 +15,7 @@ namespace IdeaInnova.Controllers
             _context = context;
         }
 
-        // ✅ GET: /UsersView/Profile
+        // GET: /UsersView/Profile
         public async Task<IActionResult> Profile()
         {
             var username = HttpContext.Session.GetString("Username");
@@ -27,11 +27,11 @@ namespace IdeaInnova.Controllers
 
             ViewBag.User = user;
             ViewBag.Ideas = ideas;
-            return View(); // ✅ Will look in Views/UsersView/Profile.cshtml
+            return View(); //Will look in Views/UsersView/Profile.cshtml
         }
 
 
-        // ✅ GET: /UsersView/Leaderboard
+        // GET: /UsersView/Leaderboard
         public async Task<IActionResult> Leaderboard()
         {
             if (HttpContext.Session.GetString("Username") == null)

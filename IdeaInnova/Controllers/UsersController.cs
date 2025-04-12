@@ -1,61 +1,4 @@
 
-//using IdeaInnova.Models;
-//using Microsoft.AspNetCore.Mvc;
-//using Microsoft.EntityFrameworkCore;
-//using System.Linq;
-//using System.Threading.Tasks;
-
-//namespace IdeaInnova.Controllers
-//{
-//    [Route("api/[controller]")]
-//    [ApiController]
-//    public class UsersController : ControllerBase
-//    {
-//        private readonly IdeaInnovaContext _context;
-
-//        public UsersController(IdeaInnovaContext context)
-//        {
-//            _context = context;
-//        }
-
-//        // POST: api/users/login
-//        [HttpPost("login")]
-//        public async Task<IActionResult> Login([FromBody] User user)
-//        {
-//            var existingUser = await _context.Users
-//                .FirstOrDefaultAsync(u => u.Username == user.Username && u.Password == user.Password);
-
-//            if (existingUser == null)
-//            {
-//                return Unauthorized("Invalid credentials.");
-//            }
-
-//            return Ok(new { Message = "Login successful", Username = existingUser.Username });
-//        }
-
-//        // POST: api/users/signup
-//        [HttpPost("signup")]
-//        public async Task<IActionResult> Signup([FromBody] User user)
-//        {
-//            var existingUser = await _context.Users
-//                .AnyAsync(u => u.Username == user.Username);
-
-//            if (existingUser)
-//            {
-//                return Conflict("User already exists.");
-//            }
-
-//            _context.Users.Add(user);
-//            await _context.SaveChangesAsync();
-
-//            return Ok(new { Message = "Signup successful" });
-//        }
-//    }
-//}
-
-
-
-
 using IdeaInnova.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -64,7 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace IdeaInnova.Controllers
-{
+{//API controller wiht routes
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -80,7 +23,7 @@ namespace IdeaInnova.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] User user)
         {
-          
+
             var existingUser = await _context.Users
                 .FirstOrDefaultAsync(u => u.Username == user.Username && u.Password == user.Password);
 
@@ -110,21 +53,21 @@ namespace IdeaInnova.Controllers
                 return Conflict("User already exists.");
             }
 
-            user.Role ??= "User"; // Default role
+            user.Role ??= "User"; 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
             return Ok(new { Message = "Signup successful", UserId = user.Id });
         }
 
-        //  GET: api/users - List all users
+        //  GET: api/users for listing users 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetAllUsers()
         {
             return await _context.Users.ToListAsync();
         }
 
-        //  GET: api/users/{id} - Get user by ID
+        //  GET: api/users/{id} 
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUserById(int id)
         {
@@ -134,7 +77,7 @@ namespace IdeaInnova.Controllers
             return user;
         }
 
-        //  GET: api/users/{id}/ideas - Get user's submitted ideas
+        //  GET: api/users/{id}/idea for submititnng user ideas 
         [HttpGet("{id}/ideas")]
         public async Task<ActionResult<IEnumerable<Idea>>> GetUserIdeas(int id)
         {
@@ -146,7 +89,7 @@ namespace IdeaInnova.Controllers
             return ideas;
         }
 
-        //  GET: api/users/leaderboard - Leaderboard (if not in IdeasController)
+        //  GET: api/users/leaderboard 
         [HttpGet("leaderboard")]
         public async Task<IActionResult> GetLeaderboard()
         {

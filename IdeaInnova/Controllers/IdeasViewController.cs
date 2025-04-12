@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace IdeaInnova.Controllers
-{
+{ // This controller handles the Razor view-based actions for submitting and voting on ideas
     public class IdeasViewController : Controller
     {
         private readonly IdeaInnovaContext _context;
@@ -19,8 +19,14 @@ namespace IdeaInnova.Controllers
             if (HttpContext.Session.GetString("Username") == null)
                 return RedirectToAction("Login", "Account");
 
-            return View(); // Views/Ideas/Submit.cshtml
+            
+            var user = _context.Users
+                .FirstOrDefault(u => u.Username == HttpContext.Session.GetString("Username"));
+
+            ViewBag.User = user;  
+            return View();
         }
+
 
         // POST: /Ideas/Submit
         [HttpPost]
@@ -29,13 +35,20 @@ namespace IdeaInnova.Controllers
             if (HttpContext.Session.GetString("Username") == null)
                 return RedirectToAction("Login", "Account");
 
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == HttpContext.Session.GetString("Username"));
-            idea.UserId = user?.Id;
-            _context.Ideas.Add(idea);
+            if (!ModelState.IsValid)
+            {
+               
+                var user = _context.Users.FirstOrDefault(u => u.Username == HttpContext.Session.GetString("Username"));
+                ViewBag.User = user;
+                return View(idea);
+            }
+
+            var dbUser = await _context.Users.FirstOrDefaultAsync(u => u.Username == HttpContext.Session.GetString("Username"));
+            idea.UserId = dbUser?.Id;
+            _context.Ideas.Add(idea);//save the new idea to the database 
             await _context.SaveChangesAsync();
 
             return RedirectToAction("Submitted");
-            //return RedirectToAction("Index", "Home");
         }
 
         // GET: /Ideas/Submitted
@@ -49,7 +62,7 @@ namespace IdeaInnova.Controllers
         {
             if (HttpContext.Session.GetString("Username") == null)
                 return RedirectToAction("Login", "Account");
-
+            //for passing the list of ideas to the vote.cshtml view
             var ideas = await _context.Ideas.ToListAsync();
             return View(ideas); // Views/Ideas/Vote.cshtml
         }
@@ -61,10 +74,10 @@ namespace IdeaInnova.Controllers
             var idea = await _context.Ideas.FindAsync(id);
             if (idea != null)
             {
-                idea.Votes += 1;
+                idea.Votes += 1;//Increase vot count 
                 await _context.SaveChangesAsync();
             }
-
+            //It will redirect back to the voting page 
             return RedirectToAction("Vote");
         }
     }

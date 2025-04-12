@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113 d17.12
+VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdeaInnova", "IdeaInnova\IdeaInnova.csproj", "{4229EAB5-8C8B-48E1-AF33-83748CC2530C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdeaInnova", "IdeaInnova\IdeaInnova.csproj", "{4229EAB5-8C8B-48E1-AF33-83748CC2530C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +18,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8C044BC0-9F00-4961-BE72-EB244F755482}
 	EndGlobalSection
 EndGlobal
