@@ -35,6 +35,7 @@ namespace IdeaInnova.Controllers
             await _context.SaveChangesAsync();
 
             return RedirectToAction("Submitted");
+            //return RedirectToAction("Index", "Home");
         }
 
         // GET: /Ideas/Submitted
