@@ -1,25 +1,4 @@
-﻿@* @model IEnumerable<IdeaInnova.Models.Idea> *@
-@* @{ *@
-@*     ViewData["Title"] = "Vote"; *@
-@* } *@
-
-@* <div class="p-6"> *@
-@*     <h2 class="text-2xl font-bold mb-6 text-blue-700">👍 Vote on Ideas</h2> *@
-@*     <div class="grid md:grid-cols-2 gap-6"> *@
-@*         @foreach (var idea in Model) *@
-@*         { *@
-@*             <div class="bg-white p-5 rounded-lg shadow hover:shadow-xl transition duration-300"> *@
-@*                 <h3 class="text-lg font-semibold text-purple-700">@idea.Title</h3> *@
-@*                 <p class="text-sm text-gray-700">@idea.Description</p> *@
-@*                 <form asp-action="Upvote" asp-route-id="@idea.Id" method="post"> *@
-@*                     <button type="submit" class="mt-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white px-4 py-2 rounded shadow hover:scale-105 transition">Upvote</button> *@
-@*                 </form> *@
-@*                 <p class="text-xs text-gray-500 mt-2">Votes: @idea.Votes</p> *@
-@*             </div> *@
-@*         } *@
-@*     </div> *@
-@* </div> *@
-
+﻿
 
 @model IEnumerable<IdeaInnova.Models.Idea>
 @{

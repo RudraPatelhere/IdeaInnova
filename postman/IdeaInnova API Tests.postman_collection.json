@@ -1,0 +1,395 @@
+{
+	"info": {
+		"_postman_id": "ed4d29bf-bf3f-4713-aaf8-921110945396",
+		"name": "IdeaInnova API Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "42603064"
+	},
+	"item": [
+		{
+			"name": "GET - Load Submit Ideas Page",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7273/IdeasView/Submit",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7273",
+					"path": [
+						"IdeasView",
+						"Submit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Submit Ideas Successfully",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"POST /api/ideas returns 200 or 201\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Automated Idea Test\",\r\n    \"description\": \"This idea is submitted by an automated test.\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7273/IdeasView/Submit",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7273",
+					"path": [
+						"IdeasView",
+						"Submit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Reject Submission without Description",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"POST without description returns 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Idea Without Description\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7273/IdeasView/Submit",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7273",
+					"path": [
+						"IdeasView",
+						"Submit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PATCH - Upvote Ideas",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"PATCH upvote returns 204\", function() {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7273/api/ideas/2",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7273",
+					"path": [
+						"api",
+						"ideas",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE - Delete Ideas",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"DELETE /api/ideas/{id} returns 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7273/api/ideas/2",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7273",
+					"path": [
+						"api",
+						"ideas",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET - Fetch Top Trending Ideas",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"GET /api/ideas/trending returns 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Trending ideas response is a JSON array\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.be.an(\"array\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7273/api/ideas/trending",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7273",
+					"path": [
+						"api",
+						"ideas",
+						"trending"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET - Retrieve User Leaderboard",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"GET /api/ideas/leaderboard returns 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Leaderboard response is a JSON array\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    // You might also expect an array or an object depending on your API design.\r",
+							"    pm.expect(jsonData).to.be.an(\"array\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7273/api/ideas/leaderboard",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7273",
+					"path": [
+						"api",
+						"ideas",
+						"leaderboard"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET - Fetch Ideas By Specific User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"GET /api/ideas/user/{userId} returns 200\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response is a JSON array\", function () {\r",
+							"  var jsonData = pm.response.json();\r",
+							"  pm.expect(jsonData).to.be.an(\"array\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Each idea has a Title and Description\", function () {\r",
+							"  var ideas = pm.response.json();\r",
+							"  if (ideas.length) {\r",
+							"    pm.expect(ideas[0]).to.have.property(\"title\");\r",
+							"    pm.expect(ideas[0]).to.have.property(\"description\");\r",
+							"  }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7273/api/ideas/user/1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7273",
+					"path": [
+						"api",
+						"ideas",
+						"user",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Create new idea",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"Test Idea for PATCH\",\r\n  \"description\": \"This one is created so we can PATCH it.\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7273/api/ideas?Content-Type=application/json",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7273",
+					"path": [
+						"api",
+						"ideas"
+					],
+					"query": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

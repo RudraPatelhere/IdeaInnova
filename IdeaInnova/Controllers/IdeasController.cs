@@ -49,33 +49,35 @@ namespace IdeaInnova.Controllers {
 
         //  PATCH: api/ideas/{id}
         [HttpPatch("{id}")]
-        public async Task<IActionResult> UpvoteIdea(int id)
+        public async Task<ActionResult<Idea>> UpvoteIdea(int id)
         {
             var idea = await _context.Ideas.FindAsync(id);
             if (idea == null)
-            {
                 return NotFound();
-            }
 
             idea.Votes += 1;
             await _context.SaveChangesAsync();
-            return NoContent();
+
+            // Return the updated idea (200 OK with JSON body)
+            return Ok(idea);
         }
+
 
         //DELETE: api/ideas/{id}
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteIdea(int id)
+        public async Task<ActionResult<Idea>> DeleteIdea(int id)
         {
             var idea = await _context.Ideas.FindAsync(id);
             if (idea == null)
-            {
                 return NotFound();
-            }
 
             _context.Ideas.Remove(idea);
             await _context.SaveChangesAsync();
-            return NoContent();
+
+            // Return the deleted idea so client can confirm
+            return Ok(idea);
         }
+
 
         //GET: api/ideas/trending 
         [HttpGet("trending")]
