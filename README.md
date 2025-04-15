@@ -50,4 +50,40 @@ IdeaInnova is an innovative enterprise platform designed to foster internal crea
    ```
    dotnet run
    ```
+
+
+
+
+   The Frontend:
    
+
+   1. SignUp/SignIn Page
+      
+      ![image](https://github.com/user-attachments/assets/76ad489f-2bb8-4f66-ad6e-40aecb120da9)
+
+   2. Home Page
+      
+   ![image](https://github.com/user-attachments/assets/4a94c4df-e724-47d5-a9c9-1df7f2aadbbe)
+
+   3. Submit Idea Page
+      
+   ![image](https://github.com/user-attachments/assets/ba7d52c9-2f31-4ea2-ab29-c8286aba4f49)
+
+   4. Voting Page
+      
+   ![image](https://github.com/user-attachments/assets/2f124d58-51b9-4a5d-bacd-4a17c5a7b637)
+
+   5. Leaderboard Page
+      
+   ![image](https://github.com/user-attachments/assets/9a737b0b-f4a5-469b-a9a9-a05fcf41b62b)
+
+   6. Profile Page
+     
+     ![image](https://github.com/user-attachments/assets/89122e51-735a-4b76-8b3c-c3a7abe1e802)
+
+    
+
+ 
+
+      
+
